@@ -16,7 +16,7 @@ import { jsconfigJsonContent } from "./contents/jsconfigJsonContent.js";
 import { viteConfigContent } from "./contents/viteconfigContent.js";
 import { indexHtmlContent } from "./contents/indexHtmlContent.js";
 import { mainJsxContent } from "./contents/mainJsxContent.js";
-import { appJsxContent } from "./contents/AppJsxContent.js";
+import { appJsxContent } from "./contents/appJsxContent.js";
 import { appCssContent } from "./contents/appCssContent.js";
 import { indexCssContent } from "./contents/indexCssContent.js";
 import { eslintConfigJsContent } from "./contents/eslintConfigJsContent.js";
@@ -25,13 +25,17 @@ import { prettierrcContent } from "./contents/prettierrcContent.js";
 import { tsconfigJsonContent } from "./contents/tsconfigJsonContent.js";
 import { tsconfigNodeJsonContent } from "./contents/tsconfigNodeJsonContent.js";
 import { readmeMdContent } from "./contents/readmeMdContent.js";
+import { thunderSvgContent } from "./contents/thunderSvgContent.js";
 
 // Setup Commander
 program
     .name("scaffold")
     .description("A CLI tool for scaffolding projects")
     .version("0.1.0")
-    .argument("[project-directory]", "Directory to create the project using vite")
+    .argument(
+        "[project-directory]",
+        "Directory to create the project using vite"
+    )
     .action(async (projectDirectory) => {
         try {
             console.log(chalk.blue("🚀 Welcome to flash setup!\n"));
@@ -130,6 +134,12 @@ program
                     appJsxContent(answers.projectName, fileExt)
                 );
             }
+
+            // Create SVG files
+            createFile(
+                path.join(fullPath, "public/thunder.svg"),
+                thunderSvgContent
+            );
 
             // Create CSS files
             createFile(
