@@ -1,6 +1,6 @@
 {
   "name": "flash-setup",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A quick react project builder using vite with extended package support direct in the creation",
   "main": "src/index.js",
   "bin": {
