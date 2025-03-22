@@ -1,0 +1,22 @@
+{
+  "name": "@ninja/flash-setup",
+  "version": "0.0.1",
+  "description": "A quick react project builder using vite with extended package support direct in the creation",
+  "main": "src/index.js",
+  "bin": {
+    "flash-setup": "bin/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": ["vite-extended", "flash-setup", "@ninja/flash-setup"],
+  "author": "ninja-vikash",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.5.0"
+  }
+}
