@@ -24,16 +24,17 @@ import { eslintrcContent } from "./contents/eslintrcContent.js";
 import { prettierrcContent } from "./contents/prettierrcContent.js";
 import { tsconfigJsonContent } from "./contents/tsconfigJsonContent.js";
 import { tsconfigNodeJsonContent } from "./contents/tsconfigNodeJsonContent.js";
+import { readmeMdContent } from "./contents/readmeMdContent.js";
 
 // Setup Commander
 program
     .name("scaffold")
     .description("A CLI tool for scaffolding projects")
     .version("0.1.0")
-    .argument("[project-directory]", "Directory to create the project in")
+    .argument("[project-directory]", "Directory to create the project using vite")
     .action(async (projectDirectory) => {
         try {
-            console.log(chalk.blue("🚀 Welcome to Instant Creator+!\n"));
+            console.log(chalk.blue("🚀 Welcome to flash setup!\n"));
 
             // Get user answers through inquirer
             const answers = await inquirer.prompt(questions);
@@ -86,20 +87,14 @@ program
             createFile(path.join(fullPath, "package.json"), packageJsonContent);
 
             // Create README.md
-            const readmeContent = `# ${answers.projectName}\n\nA ${answers.framework} project created with Project instantCreator+.\n`;
-            createFile(path.join(fullPath, "README.md"), readmeContent);
+            createFile(path.join(fullPath, "README.md"), readmeMdContent);
 
             // Create .gitignore
             const gitignoreContent = `node_modules\ndist\n\n.env\n`;
             createFile(path.join(fullPath, ".gitignore"), gitignoreContent);
 
             // Create vite.config.js/ts
-            // let viteConfigContentData = "";
             const viteConfigExt = answers.language === true ? "ts" : "js";
-
-            // if (answers.framework === true) {
-            //     viteConfigContentData = viteConfigContent;
-            // }
 
             createFile(
                 path.join(fullPath, `vite.config.${viteConfigExt}`),
