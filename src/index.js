@@ -1,31 +1,30 @@
+import chalk from "chalk";
 import { program } from "commander";
+import fs from "fs-extra";
 import inquirer from "inquirer";
 import path from "path";
-import fs from "fs-extra";
-import chalk from "chalk";
 
+import { appCssContent } from "./contents/appCssContent.js";
+import { appJsxContent } from "./contents/appJsxContent.js";
+import { eslintConfigJsContent } from "./contents/eslintConfigJsContent.js";
+import { eslintrcContent } from "./contents/eslintrcContent.js";
+import { indexCssContent } from "./contents/indexCssContent.js";
+import { indexHtmlContent } from "./contents/indexHtmlContent.js";
+import { jsconfigJsonContent } from "./contents/jsconfigJsonContent.js";
+import { mainJsxContent } from "./contents/mainJsxContent.js";
+import { prettierrcContent } from "./contents/prettierrcContent.js";
+import { readmeMdContent } from "./contents/readmeMdContent.js";
+import { thunderSvgContent } from "./contents/thunderSvgContent.js";
+import { tsconfigJsonContent } from "./contents/tsconfigJsonContent.js";
+import { tsconfigNodeJsonContent } from "./contents/tsconfigNodeJsonContent.js";
+import { viteConfigContent } from "./contents/viteconfigContent.js";
+import { rootFolders, srcFolders } from "./folders.js";
 import questions from "./questions.js";
 import {
     createDirectory,
     createFile,
-    processTemplate,
-    generatePackageJson,
+    generatePackageJson
 } from "./utils.js";
-import { rootFolders, srcFolders } from "./folders.js";
-import { jsconfigJsonContent } from "./contents/jsconfigJsonContent.js";
-import { viteConfigContent } from "./contents/viteconfigContent.js";
-import { indexHtmlContent } from "./contents/indexHtmlContent.js";
-import { mainJsxContent } from "./contents/mainJsxContent.js";
-import { appJsxContent } from "./contents/appJsxContent.js";
-import { appCssContent } from "./contents/appCssContent.js";
-import { indexCssContent } from "./contents/indexCssContent.js";
-import { eslintConfigJsContent } from "./contents/eslintConfigJsContent.js";
-import { eslintrcContent } from "./contents/eslintrcContent.js";
-import { prettierrcContent } from "./contents/prettierrcContent.js";
-import { tsconfigJsonContent } from "./contents/tsconfigJsonContent.js";
-import { tsconfigNodeJsonContent } from "./contents/tsconfigNodeJsonContent.js";
-import { readmeMdContent } from "./contents/readmeMdContent.js";
-import { thunderSvgContent } from "./contents/thunderSvgContent.js";
 
 // Setup Commander
 program
@@ -38,7 +37,7 @@ program
     )
     .action(async (projectDirectory) => {
         try {
-            console.log(chalk.blue("🚀 Welcome to flash setup!\n"));
+            console.log(chalk.blue(`\n⚡ Welcome to ${chalk.yellowBright("flash-setup")}!\n`));
 
             // Get user answers through inquirer
             const answers = await inquirer.prompt(questions);

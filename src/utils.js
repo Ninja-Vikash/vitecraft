@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import chalk from "chalk";
+import versions from "./versions.js";
 
 // Create directory if it doesn't exist
 const createDirectory = (dirPath) => {
@@ -36,7 +37,7 @@ const processTemplate = (templateString, variables) => {
 const generatePackageJson = (answers) => {
     const packageJson = {
         name: answers.projectName,
-        version: "0.1.0",
+        version: "0.0.1",
         private: true,
         type: "module",
         scripts: {
@@ -47,56 +48,56 @@ const generatePackageJson = (answers) => {
         },
         dependencies: {},
         devDependencies: {
-            globals: "^15.15.0",
-            vite: "^6.2.0",
+            globals: versions.globals,
+            vite: versions.vite,
         },
     };
 
     // Would you like to use axios?
     if (answers.api === true) {
-        packageJson.dependencies["axios"] = "^1.8.0";
+        packageJson.dependencies["axios"] = versions.axios;
     }
 
     // Would you like to use react?
     if (answers.framework === true) {
-        packageJson.dependencies["react"] = "^19.0.0";
-        packageJson.dependencies["react-dom"] = "^19.0.0";
-        packageJson.devDependencies["@vitejs/plugin-react"] = "^4.3.4";
+        packageJson.dependencies["react"] = versions.react;
+        packageJson.dependencies["react-dom"] = versions["react-dom"];
+        packageJson.devDependencies["@vitejs/plugin-react"] = versions["@vitejs/plugin-react"];
     } else if (answers.framework === false) {
     }
 
     // Would you like to use TypeScript?
     if (answers.language === true) {
-        packageJson.devDependencies["typescript"] = "^4.9.0";
-        packageJson.devDependencies["@types/react"] = "^19.0.10";
-        packageJson.devDependencies["@types/react-dom"] = "^19.0.4";
+        packageJson.devDependencies["typescript"] = versions.typescript;
+        packageJson.devDependencies["@types/react"] = versions["@types/react"];
+        packageJson.devDependencies["@types/react-dom"] = versions["@types/react-dom"];
     }
 
     // Add optional features
     if (answers.features.includes("ESLint")) {
-        packageJson.devDependencies["@eslint/js"] = "^9.21.0";
-        packageJson.devDependencies["eslint"] = "^9.21.0";
-        packageJson.devDependencies["eslint-plugin-react"] = "^7.37.4";
-        packageJson.devDependencies["eslint-plugin-react-hooks"] = "^5.0.0";
-        packageJson.devDependencies["eslint-plugin-react-refresh"] = "^0.4.19";
+        packageJson.devDependencies["@eslint/js"] = versions["@eslint/js"];
+        packageJson.devDependencies["eslint"] = versions.eslint;
+        packageJson.devDependencies["eslint-plugin-react"] = versions["eslint-plugin-react"];
+        packageJson.devDependencies["eslint-plugin-react-hooks"] = versions["eslint-plugin-react-hooks"];
+        packageJson.devDependencies["eslint-plugin-react-refresh"] = versions["eslint-plugin-react-refresh"];
     }
 
     if (answers.features.includes("Prettier")) {
-        packageJson.devDependencies["prettier"] = "^2.8.0";
+        packageJson.devDependencies["prettier"] = versions.prettier;
     }
 
     // Additional packages
     if (answers.features.includes("React Router")) {
-        packageJson.dependencies["react-router-dom"] = "^6.4.0";
+        packageJson.dependencies["react-router-dom"] = versions["react-router-dom"];
     }
 
     // Add CSS framework
     if (answers.cssFramework === "Tailwind CSS") {
-        packageJson.dependencies["@tailwindcss/vite"] = "^4.0.9";
+        packageJson.dependencies["@tailwindcss/vite"] = versions["@tailwind/vite"];
     } else if (answers.cssFramework === "Material UI") {
-        packageJson.dependencies["@mui/material"] = "^5.11.0";
-        packageJson.dependencies["@emotion/react"] = "^11.10.0";
-        packageJson.dependencies["@emotion/styled"] = "^11.10.0";
+        packageJson.dependencies["@mui/material"] = versions["@mui/material"];
+        packageJson.dependencies["@emotion/react"] = versions["@emotion/react"];
+        packageJson.dependencies["@emotion/styled"] = versions["@emotion/styled"];
     }
 
     return JSON.stringify(packageJson, null, 2);
