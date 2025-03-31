@@ -1,4 +1,15 @@
-export const indexCssContent = `:root {
+export const indexCssContent = (framework) => {
+    if (framework === "Material UI") {
+        return `*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}`;
+    }
+    
+    return `:root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -26,4 +37,5 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}`
+}`;
+};

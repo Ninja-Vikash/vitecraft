@@ -30,7 +30,8 @@ export default {
     prettier: "^2.8.0",
 
     "@tailwind/vite": "^4.0.9",
-    "@mui/material": "^5.11.0",
+    "@mui/material": "^7.0.1",
+    "@mui/icons-material": "^7.0.1",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
 };

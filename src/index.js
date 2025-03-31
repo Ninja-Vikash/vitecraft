@@ -8,23 +8,24 @@ import { appCssContent } from "./contents/appCssContent.js";
 import { appJsxContent } from "./contents/appJsxContent.js";
 import { eslintConfigJsContent } from "./contents/eslintConfigJsContent.js";
 import { eslintrcContent } from "./contents/eslintrcContent.js";
+import { flashSvgContent } from "./contents/flashSvgContent.js";
+import { imageBaseContent } from "./contents/imageBaseContent.js";
+import { imageCardContent } from "./contents/imageCardContent.js";
 import { indexCssContent } from "./contents/indexCssContent.js";
 import { indexHtmlContent } from "./contents/indexHtmlContent.js";
 import { jsconfigJsonContent } from "./contents/jsconfigJsonContent.js";
 import { mainJsxContent } from "./contents/mainJsxContent.js";
+import { materialuiSvgContent } from "./contents/materialuiSvgContent.js";
 import { prettierrcContent } from "./contents/prettierrcContent.js";
+import { reactSvgContent } from "./contents/reactSvgContent.js";
 import { readmeMdContent } from "./contents/readmeMdContent.js";
-import { thunderSvgContent } from "./contents/thunderSvgContent.js";
+import { tailwindcssSvgContent } from "./contents/tailwindcssSvgContent.js";
 import { tsconfigJsonContent } from "./contents/tsconfigJsonContent.js";
 import { tsconfigNodeJsonContent } from "./contents/tsconfigNodeJsonContent.js";
 import { viteConfigContent } from "./contents/viteconfigContent.js";
 import { rootFolders, srcFolders } from "./folders.js";
 import questions from "./questions.js";
-import {
-    createDirectory,
-    createFile,
-    generatePackageJson
-} from "./utils.js";
+import { createDirectory, createFile, generatePackageJson } from "./utils.js";
 
 // Setup Commander
 program
@@ -37,7 +38,11 @@ program
     )
     .action(async (projectDirectory) => {
         try {
-            console.log(chalk.blue(`\n⚡ Welcome to ${chalk.yellowBright("flash-setup")}!\n`));
+            console.log(
+                chalk.blue(
+                    `\n⚡ Welcome to ${chalk.yellowBright("flash-setup")}!\n`
+                )
+            );
 
             // Get user answers through inquirer
             const answers = await inquirer.prompt(questions);
@@ -130,15 +135,59 @@ program
 
                 createFile(
                     path.join(fullPath, `src/App.${fileExt}`),
-                    appJsxContent(answers.projectName, fileExt)
+                    appJsxContent(answers.cssFramework)
+                );
+            }
+
+            // Create MUI extended component
+            if (answers.cssFramework.includes("Material UI")) {
+                createDirectory(path.join(`${fullPath}/src/components`, "ui"));
+                createDirectory(
+                    path.join(`${fullPath}/src/components/ui`, "extended")
+                );
+                createFile(
+                    path.join(
+                        fullPath,
+                        "src/components/ui/extended/ImageBase.jsx"
+                    ),
+                    imageBaseContent
+                );
+                createFile(
+                    path.join(fullPath, "src/components/ui/extended/index.jsx"),
+                    `export { default as ImageBase } from "./ImageBase";`
+                );
+            }
+
+            // Create Component for MUI
+            if (answers.cssFramework.includes("Material UI")) {
+                createFile(
+                    path.join(fullPath, "src/components/ImageCard.jsx"),
+                    imageCardContent
                 );
             }
 
             // Create SVG files
             createFile(
-                path.join(fullPath, "public/thunder.svg"),
-                thunderSvgContent
+                path.join(fullPath, "public/flash.svg"),
+                flashSvgContent
             );
+
+            if (answers.framework === true) {
+                createFile(
+                    path.join(fullPath, "public/react.svg"),
+                    reactSvgContent
+                );
+
+                createFile(
+                    path.join(fullPath, "public/material-ui.svg"),
+                    materialuiSvgContent
+                );
+
+                createFile(
+                    path.join(fullPath, "public/tailwindcss.svg"),
+                    tailwindcssSvgContent
+                );
+            }
 
             // Create CSS files
             createFile(
@@ -146,10 +195,29 @@ program
                     fullPath,
                     answers.framework === true ? "src/App.css" : "src/style.css"
                 ),
-                appCssContent
+                appCssContent(answers.cssFramework)
             );
 
-            createFile(path.join(fullPath, "src/index.css"), indexCssContent);
+            // Update index.css for tailwindcss
+            if (answers.cssFramework.includes("Tailwind CSS")) {
+                createFile(
+                    path.join(fullPath, "src/index.css"),
+                    `@import "tailwindcss";`
+                );
+            }
+
+            // Update index.css for material-ui
+            if (answers.cssFramework.includes("Material UI")) {
+                createFile(
+                    path.join(fullPath, "src/index.css"),
+                    indexCssContent(answers.cssFramework)
+                );
+            }
+
+            // createFile(
+            //     path.join(fullPath, "src/index.css"),
+            //     indexCssContent(answers.cssFramework)
+            // );
 
             // eslint.config.js file
             if (answers.features.includes("ESLint")) {
@@ -187,14 +255,6 @@ program
                 createFile(
                     path.join(fullPath, "tsconfig.node.json"),
                     tsconfigNodeJsonContent
-                );
-            }
-
-            // Update index.css for tailwindcss
-            if (answers.cssFramework.includes("Tailwind CSS")) {
-                createFile(
-                    path.join(fullPath, "src/index.css"),
-                    `@import "tailwindcss";`
                 );
             }
 

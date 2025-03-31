@@ -1,4 +1,8 @@
-export const appCssContent = `#app {
+export const appCssContent = (framework) => {
+    if (["Material UI", "Tailwind CSS"].includes(framework)) {
+        return ``;
+    }
+    return `#app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -32,4 +36,5 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}`
+}`;
+};
