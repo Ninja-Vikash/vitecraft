@@ -40,7 +40,7 @@ program
         try {
             console.log(
                 chalk.blue(
-                    `\n⚡ Welcome to ${chalk.yellowBright("flash-setup")}!\n`
+                    `\n⚡ Welcome to ${chalk.yellowBright("vitecraft")}!\n`
                 )
             );
 

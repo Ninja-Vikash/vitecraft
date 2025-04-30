@@ -1,23 +1,23 @@
 {
-  "name": "flash-setup",
+  "name": "vitecraft",
   "version": "0.3.2",
-  "description": "A quick react project builder using vite with extended package support direct in the creation",
+  "description": "Start developing your react app with ease with pre-packed dependency support",
   "main": "src/index.js",
   "bin": {
-    "flash-setup": "bin/index.js"
+    "vitecraft": "bin/index.js"
   },
   "type": "module",
   "scripts": {
     "start": "node bin/index.js"
   },
   "keywords": [
-    "vite-extended",
-    "flash-setup",
-    "@ninja/flash-setup"
+    "react",
+    "vitecraft",
+    "vite"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ninja-Vikash/flash-setup.git"
+    "url": "https://github.com/Ninja-Vikash/vitecraft.git"
   },
   "author": "ninja-vikash",
   "license": "ISC",
