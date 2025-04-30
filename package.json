@@ -1,6 +1,6 @@
 {
   "name": "vitecraft",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Start developing your react app with ease with pre-packed dependency support",
   "main": "src/index.js",
   "bin": {
