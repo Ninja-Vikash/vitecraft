@@ -1,6 +1,7 @@
 # vitecraft
+An alternative tool for creating react app using `vite` and extra packages support.
 
-<div align="center">
+<div align="start">
 <img src="https://img.shields.io/badge/node.js-v20.11.0-green?logo=node.js"/>
 <img src="https://img.shields.io/badge/react.js-v19.0.0-blue?logo=react"/>
 <img src="https://img.shields.io/badge/react router dom-v6.4.0-purple"/>
